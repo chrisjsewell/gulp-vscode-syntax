@@ -12,7 +12,7 @@
     "contributes": {
         "languages": [{
             "id": "gulp",
-            "aliases": ["General Utility Lattice Program (GULP)", "gulp"],
+            "aliases": ["GULP", "gulp"],
             "extensions": [".gin"],
             "configuration": "./language-configuration.json"
         }],
