@@ -1,8 +1,19 @@
 {
     "name": "gulp-lattice",
-    "displayName": "gulp-lattice",
+    "displayName": "GULP",
+    "title": "General Utility Lattice Program",
     "description": "a syntax highlighter for input files to General Utility Lattice Program (GULP)",
     "version": "0.0.1",
+    "authors": [
+        "Chris Sewell"
+    ],
+    "publisher": "chrisjsewell",
+    "license": "SEE LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chrisjsewell/gulp-vscode-syntax.git"
+    },
+    "homepage": "https://github.com/chrisjsewell/gulp-vscode-syntax/blob/master/README.md",
     "engines": {
         "vscode": "^1.36.0"
     },
@@ -10,16 +21,25 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "gulp",
-            "aliases": ["GULP", "gulp"],
-            "extensions": [".gin"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "gulp",
-            "scopeName": "source.gulp",
-            "path": "./syntaxes/gulp.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "gulp",
+                "aliases": [
+                    "GULP",
+                    "gulp"
+                ],
+                "extensions": [
+                    ".gin"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "gulp",
+                "scopeName": "source.gulp",
+                "path": "./syntaxes/gulp.tmLanguage.json"
+            }
+        ]
     }
 }
