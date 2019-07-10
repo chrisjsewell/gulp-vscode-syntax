@@ -1,0 +1,339 @@
+marvin:
+
+    generates a file suitable for input to Marvin for
+    surface calculations. Index of surface plane needs to be
+    added first, though this may be passed through GULP to the
+    marvin input but using the "marvin" option. If the file
+    extension ".mvn" is not given by the user it will be added
+    by the program.
+
+    e.g. output marvin alumina produces alumina.mvn
+
+    If a file for Marvin2 is required, then use the sub-option
+    marvin2 instead.
+
+    e.g. output marvin2 alumina
+
+thbrel:
+
+    converts the final bulk structure into a file format
+    suitable for the THBREL suite of programs. Not all features
+    are readily transferable between the programs so no guarantee
+    is made that the input file is perfect and for similar reasons
+    both programs may not always yield the same results unless the
+    user is careful to make sure the files are equivalent. If a
+    phonon run has been requested then the output is modified for
+    THBPHON instead of THBREL.
+
+xtl:
+
+    this is only applicable to crystal structures with a
+    single structure per file. Produces a .xtl file for input
+    into the BIOSYM software, though use of the archive file is
+    better unless symmetry is present. If the filename input is
+    not already terminated with ".xtl" then this will be added
+    by the program.
+    e.g. output xtl alumina produces alumina.xtl
+
+xr:
+
+    this will output a modified CSSR file suitable for
+    input into the Oxford Materials graphical interface
+    program Crysalis. The file will have the extension ".xr"
+    added. At the moment this is only applicable to 3D
+    systems.
+
+    e.g. output xr alumina produces alumina.xr
+
+cssr:
+
+    this will output a CSSR file suitable for input
+    into the MSI graphical interface Cerius2. The file will
+    have the extension ".cssr" added. At the moment this
+    is only applicable to 3D systems.
+
+    e.g. output cssr alumina produces alumina.cssr
+
+arc:
+
+    alternatively known as a ".car" file. This option produces
+    archive files suitable for input into the BIOSYM Insight software
+    and will handle bulk, cluster and defect calculations, all with
+    multiple structures. The username should input a root name,
+    e.g. output arc alumina
+    The program will then produce archive file names with either
+    "_3D", "_defe", or "_0D" appended to distinguish the files
+    resulting from a particular section of the run. If multiple
+    structures are present then an underscore followed by the
+    structure number will be added, all followed by ".arc".
+    e.g. if the above input for alumina contained two bulk structures
+    then the files produced would be "alumina_bulk_1.arc" and
+    "alumina_bulk_2.arc".
+    If the word "movie" is specified then all structures during an
+    optimisation will be included in the arcfile, rather than just
+    the final one, so that the optimisation may be viewed.
+    e.g. output movie arc alumina
+    NB for MD runs the name of the archive file is set by
+    "mdarchive" to avoid overwriting the optimisation archive
+    file if present. Also in the case of MD the file is only
+    written during the production phase.
+    It is also possible to specify a frequency for the output
+
+    e.g. output movie 5 arc alumina
+
+    This would output an archive file frame every 5 steps during the
+    movie. The default is to output at every step.
+    NB The residue field has now been changed to contain the molecule
+    number, rather than the atom number or a dummy string.
+
+xyz:
+
+    this will output an xyz file suitable for
+    input into programs such as Molden and with slight
+    modification Unichem. The file will have the extension ".xyz"
+    At the moment this is only applicable to non-periodic
+    systems. When called with a periodic case just the Cartesian
+    coordinates will be output, without the unit cell.
+    e.g. output xyz cluster produces cluster.xyz
+    If the word "movie" is specified then all structures during an
+    optimisation will be included in the xyz file, rather than just
+    the final one, so that the optimisation may be viewed.
+    e.g. output movie xyz cluster
+
+trajectory:
+
+    this is a binary file which stores the coordinates
+    and velocities from a molecular dynamics run, as well as some
+    of the system properties. This file is used by the Cerius interface
+    to generate a .trj file for analysis in Cerius. Note that this
+    file is only written during the production phase by default.
+    e.g. output trajectory alumina
+    For this sub-option the further option "ascii" may be specified
+    in order to obtain an ASCII format trajectory file. Note that
+    this is less efficient for disk space usage!
+    e.g. output trajectory ascii alumina
+    Furthermore, the sub-option "equil" may be added to force writing
+    during the equilibration phase of the simulation.
+    The default extension for this file type is .trg
+
+history:
+
+    this is a text file in the DLPOLY HISTORY file format
+    containing the structure and velocities sampled from a MD run.
+    This file can be used for post-MD analysis using the same
+    programs as for DLPOLY such as "After".
+
+fdf:
+
+    this is a text file in the Flexible Data Format of Alberto
+    Garcia and Jose M. Soler. This file can then form the basis of
+    an input deck for the program SIESTA.
+
+drv:
+
+    this is a text file containing the energy and appropriate
+    derivatives calculated by GULP at the last function evaluation.
+    This can be used for QM/MM schemes. Note that if freezing is
+    being used then second derivatives may not be output since not
+    all derivatives may be calculated. To turn off freezing then
+    specify the keyword "noexclude".
+
+frc:
+
+    this is a text file containing the energy and appropriate
+    force constants for cores only calculated by GULP during a phonon
+    calculation. This can be used for QM/MM schemes, such as in the
+    program QMPOT. A phonon calculation must be specified otherwise
+    no file will be output. 
+    NB Force constant matrices can also be
+    output in a format suitable for ShengBTE and Phonopy using the
+    output shengbte option.
+
+cif:
+
+    this is only applicable to crystal structures with a
+    single structure per file. Produces a .cif file for input
+    into a variety of programs. If the filename input is
+    not already terminated with ".cif" then this will be added
+    by the program. Note that at present the files are output
+    in P1 regardless of symmetry for simplicity.
+    e.g. output cif alumina produces alumina.cif
+    Strictly speak a cif file is only valid for 3-D systems, but
+    files can be output from GULP for 0-D, 1-D and 2-D with the
+    addition of a dummy cell parameter. This value can be set
+    from the option
+
+    e.g. output cif 12.0 surface
+
+    will create a 3-D cif file with a dummy lattice parameter of
+    12 Angstroms for directions that are non-periodic. The default
+    dummy lattice parameter is 0 which implies that a cif file
+    shouldn't be written for the wrong periodicity.
+
+str:
+
+    this is a file in the CRYSTAL98 format, suitable for
+    reading by DLV. If the filename input is not already
+    terminated with ".str" then this will be added. If multiple
+    structures are specified then the filename will be modified
+    so that a separate file can be written for each structure.
+
+phonon:
+
+    this option leads to the density of states from a
+    phonon calculation and any dispersion curve points being
+    output to the files <filename>.dens and <filename>.disp,
+    respectively, in a format suitable for input into a curve
+    plotting program. If the sub-option "ir" is specified then
+    the density of states will be weighted by the IR intensities
+    e.g. output phonon ir alumina
+
+frequency:
+
+    this option produces a list of frequencies over all
+    k points for use in an analysis program. A typical application
+    might be in the calculation of the Gruneisen parameter by
+    differencing of the frequencies with respect to the cell volume.
+    The file can either be output in binary format (to maintain
+    precision - the default)
+
+    e.g. output freq binary <filename> <ndecimal>
+
+    or as ordinary text
+
+    e.g. output freq text <filename> <ndecimal>
+
+    Here the optional value of ndecimal specifies how many decimal
+    places you get (up to a maximum of 12 since going further than
+    this would be non-sensical in double precision!).
+
+pressure:
+
+    this option outputs a file containing the pressure
+    tensor during a molecular dynamics run, both instanteously and
+    as an average. File is output as <filename>.pre using units of
+    GPa.
+
+osc:
+
+    this is a text file containing the oscillator strengths
+    for the phonon modes so that the frequency dependent data can
+    be handled in post processing. In this file the frequencies
+    are in wavenumbers, while the oscillator strengths are in cm^-2
+
+pdf:
+
+    this option sets the name for the .wid and .pdf files
+    created by the pdf keyword. The .wid file can be suppressed by
+    the nowidth keyword.
+
+cosmo:
+
+    this outputs a COSMO file in the Accelrys format for
+    visualisation of information relating to solvation an the
+    solvent accessible surface
+
+lammps:
+
+    this outputs a LAMMPS input files for a system based on
+    the information available to GULP. This includes a .lmp file
+    containing the structure and bonding information. If followed by
+    "var" then variable names will be used in the output.
+
+lammps_pots:
+
+    this outputs a LAMMPS file containing a tabulation
+    of any twobody potentials. There are 3 addition pieces of information
+    that can be provided which are the start of the range, r0, the end
+    of the range, rend, and the number of points, np.
+    e.g. output lammps_pots 0.1 9.0 1000 myfile
+    This would create a table from 0.1 to 9.0 Angstroms with 1000 points
+    and write it to a file called myfile.
+
+cml:
+
+    this is a Chemical Markup Language output file which
+    contains all the important information about the calculation
+    in an XML format. This output is suitable for various database
+    tools and for data transfer between CML-enabled applications.
+
+eig:
+
+    this outputs the eigenvectors for each K point as a file.
+
+qbo:
+
+    this file contains the charges and bond orders, as appropriate,
+    for a potential model.
+    e.g. output qbo myfile
+    The above command would produce a file myfile.qbo containing the
+    charges and bond orders for the final configuration. If the
+    values for all structures are required then the sub-option "append"
+    can be used
+
+    e.g. output qbo append myfile
+
+dcd:
+
+    this file contains the coordinates from an MD trajectory and
+    can be used by programs such as VMD for analysis and visualisation.
+
+inertia:
+
+    output information on the moment of inertia tensor for
+    molecules at the final structure for each configuration
+
+castep_phonon:
+
+    this file contains the phonon information from multiple
+    K points in the same format as used for the program CASTEP. The default
+    extension for this is ".csp"
+    e.g. output castep_phon myfile.csp
+
+kpt:
+
+    this file list the k points within the asymmetric unit of the
+    Brillouin zone along with the symmetry unique images of the k point.
+
+shengBTE:
+
+    this causes the files needed to perform a ShengBTE run to be
+    output. This usually comprises the files CONTROL, FORCE_CONSTANTS_2ND,
+    FORCE_CONSTANTS_3RD that contain the system information and control
+    parameters, the second order force constants, and the third order force
+    constants, respectively. Note that the FORCE_CONSTANTS_2ND file is also
+    suitable for use with Phonopy.
+    NB Since the calculation of the third order force constants is
+    potentially expensive expect this option to substantially increase
+    the computational cost of a run!!! The use of the keyword nod3 allows
+    the ShengBTE output to be restricted to second derivatives only.
+    NB The option "threshold" controls the minimum size for force constants
+    to be output as non-zero
+
+dipole:
+
+    this causes GULP to output a text file that contains the
+    dipole of the system for each time step of a molecular dynamics run.
+    If the delta_dipole keyword is specifed then the dipole is computed
+    relative to the initial value. The units of the dipoles for this file
+    are Debye and the format has the current time in ps follow by the
+    three Cartesian components in the order x, y and z.
+
+xsf:
+
+    output a file in XCrySDen format. When performing MD it is possible
+    to output either a single XSF file or a sequence of files for single
+    frames with a number appended to differentiate them. The format is
+
+    output xsf <seq/sym> myfile
+
+    where seq (sequential) is optional but if specified will result in multiple
+    files being output during molecular dynamics. Here myfile is the root name
+    for the file. For example;
+
+    output xsf seq myfile
+
+    would produce myfile000001.xsf, myfile000002.xsf, etc. If "sym" is specified
+    then atomic symbols are used instead of atomic numbers in the files. This
+    is relevant if using Aenet which expects symbols, whereas XCrySDen specifies
+    atomic numbers for the format.
