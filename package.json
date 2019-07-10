@@ -40,6 +40,12 @@
                 "scopeName": "source.gulp",
                 "path": "./syntaxes/gulp.tmLanguage.json"
             }
+        ],
+        "snippets": [
+            {
+                "language": "gulp",
+                "path": "./snippets/gulp-snippets.code-snippets"
+            }
         ]
     }
 }
