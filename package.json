@@ -2,7 +2,7 @@
     "name": "gulp-lattice",
     "displayName": "GULP",
     "title": "General Utility Lattice Program",
-    "description": "a syntax highlighter for input files to General Utility Lattice Program (GULP)",
+    "description": "A syntax highlighter for input files to General Utility Lattice Program (GULP)",
     "version": "0.0.1",
     "authors": [
         "Chris Sewell"
